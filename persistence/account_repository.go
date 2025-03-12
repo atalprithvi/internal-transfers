@@ -26,8 +26,8 @@ func (repo *AccountRepository) GetAccountByIDWithContext(ctx context.Context, ac
 	query := `SELECT account_id, balance FROM accounts WHERE account_id = $1`
 	err := repo.DB.GetContext(ctx, &account, query, accountID)
 	if err != nil {
-		if err == sql.ErrNoRows { // Use sql.ErrNoRows instead of sqlx.ErrNoRows
-			return nil, nil // Return nil if no rows found
+		if err == sql.ErrNoRows { 
+			return nil, nil 
 		}
 		return nil, fmt.Errorf("error getting account by ID: %v", err)
 	}
@@ -37,7 +37,7 @@ func (repo *AccountRepository) GetAccountByIDWithContext(ctx context.Context, ac
 // CreateAccountWithContext creates a new account using context with timeout
 func (repo *AccountRepository) CreateAccountWithContext(ctx context.Context, account model.Account) error {
 	query := `INSERT INTO accounts (account_id, balance) VALUES ($1, $2)`
-	_, err := repo.DB.ExecContext(ctx, query, account.AccountID, account.Balance.String()) // Use String() for decimal
+	_, err := repo.DB.ExecContext(ctx, query, account.AccountID, account.Balance.String())
 	if err != nil {
 		return fmt.Errorf("error creating account: %v", err)
 	}
