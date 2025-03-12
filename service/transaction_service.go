@@ -91,7 +91,6 @@ func (transactionService *TransactionService) performTransactionWithRetry(transa
 		return err
 	}
 
-	// Save the transaction record
 	if err := transactionService.TransactionRepo.SaveTransactionWithContext(ctx, transaction); err != nil {
 		transactionService.updateAccountBalanceWithContext(ctx, sourceAccount, transaction.Amount)
 		transactionService.updateAccountBalanceWithContext(ctx, destinationAccount, transaction.Amount.Neg())
