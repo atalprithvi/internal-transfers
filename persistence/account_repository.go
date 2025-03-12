@@ -10,7 +10,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-// AccountRepository defines methods to interact with the accounts table in the database
+// Defines methods to interact with the accounts table in the database
 type AccountRepository struct {
 	DB *sqlx.DB
 }
@@ -20,7 +20,7 @@ func NewAccountRepository(db *sqlx.DB) *AccountRepository {
 	return &AccountRepository{DB: db}
 }
 
-// GetAccountByIDWithContext retrieves an account by its ID using context with timeout
+// Retrieves an account by its ID using context with timeout
 func (repo *AccountRepository) GetAccountByIDWithContext(ctx context.Context, accountID int) (*model.Account, error) {
 	var account model.Account
 	query := `SELECT account_id, balance FROM accounts WHERE account_id = $1`
@@ -34,7 +34,7 @@ func (repo *AccountRepository) GetAccountByIDWithContext(ctx context.Context, ac
 	return &account, nil
 }
 
-// CreateAccountWithContext creates a new account using context with timeout
+// Creates a new account using context with timeout
 func (repo *AccountRepository) CreateAccountWithContext(ctx context.Context, account model.Account) error {
 	query := `INSERT INTO accounts (account_id, balance) VALUES ($1, $2)`
 	_, err := repo.DB.ExecContext(ctx, query, account.AccountID, account.Balance.String())
@@ -44,7 +44,7 @@ func (repo *AccountRepository) CreateAccountWithContext(ctx context.Context, acc
 	return nil
 }
 
-// UpdateAccountBalanceWithContext updates the balance of an existing account using context with timeout
+// Updates the balance of an existing account using context with timeout
 func (repo *AccountRepository) UpdateAccountBalanceWithContext(ctx context.Context, accountID int, newBalance decimal.Decimal) error {
 	query := `UPDATE accounts SET balance = $1 WHERE account_id = $2`
 	_, err := repo.DB.ExecContext(ctx, query, newBalance.String(), accountID)
