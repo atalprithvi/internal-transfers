@@ -6,6 +6,6 @@ type AccountError struct {
 	Message string
 }
 
-func (e *AccountError) Error() string {
-	return fmt.Sprintf("AccountError: %s", e.Message)
+func (accountError *AccountError) Error() string {
+	return fmt.Sprintf("AccountError: %s", accountError.Message)
 }
