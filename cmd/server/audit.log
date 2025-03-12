@@ -1,0 +1,11 @@
+2025/03/12 15:58:51 Transaction Initiated: Source Account ID: 12, Destination Account ID: 884448, Amount: 10
+2025/03/12 15:58:51 Amount Validation: Transaction Amount: 10 (Valid: true)
+2025/03/12 15:58:51 Destination Account Found: Destination Account ID: 884448, Balance: 20.23344
+2025/03/12 15:58:51 Transaction Completed: Transaction from Account 12 to Account 884448 for Amount: 10
+2025/03/12 15:59:06 CreateAccount: Account created with ID: 677727
+2025/03/12 17:21:08 Transaction Initiated: Source Account ID: 8899888, Destination Account ID: 12, Amount: 1
+2025/03/12 17:21:08 Amount Validation: Transaction Amount: 1 (Valid: true)
+2025/03/12 17:21:19 Transaction Initiated: Source Account ID: 12, Destination Account ID: 8899888, Amount: 1
+2025/03/12 17:21:19 Amount Validation: Transaction Amount: 1 (Valid: true)
+2025/03/12 17:21:19 Destination Account Found: Destination Account ID: 8899888, Balance: 0.23344
+2025/03/12 17:21:19 Transaction Completed: Transaction from Account 12 to Account 8899888 for Amount: 1
