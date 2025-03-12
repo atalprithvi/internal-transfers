@@ -99,6 +99,18 @@ CREATE TABLE transactions (
     FOREIGN KEY (destination_account_id) REFERENCES accounts(account_id)
 );
 
+*****
+   Assumptions:
+    - Each account must have a unique account_id.
+    - An account balance is a decimal number that can hold fractional amounts.
+    - The account_id is a mandatory field when creating an account.
+    - Both source_account_id and destination_account_id must refer to existing, valid accounts.
+    - The transaction amount must be a positive decimal number.
+    - Sufficient balance should be available in the source account to perform a transaction.
+    - Both the accounts are in an valid stat. Other states e.g. inactive, frozen are out of scope.
+    
 ***
-Add created_date/udpated_date,updated_by columns - TODO
-Complete Test Coverage - TODO
+TODO:
+I) Complete Unit tests coverage.
+II)Add created_date/udpated_date,updated_by columns.
+III) Handle concurrency.
