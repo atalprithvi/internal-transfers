@@ -54,7 +54,7 @@ func (ac *AccountController) GetAccountHandler(writer http.ResponseWriter, reque
 	}
 }
 
-func (ac *AccountController) CreateAccountHandler(writer http.ResponseWriter, r *http.Request) {
+func (accountController *AccountController) CreateAccountHandler(writer http.ResponseWriter, r *http.Request) {
 	var input model.CreateAccountInput
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
 		http.Error(writer, "Invalid input", http.StatusBadRequest)
@@ -66,7 +66,7 @@ func (ac *AccountController) CreateAccountHandler(writer http.ResponseWriter, r 
 		return
 	}
 
-	existingAccount, err := ac.Service.GetAccountByID(input.AccountID)
+	existingAccount, err := accountController.Service.GetAccountByID(input.AccountID)
 	if err != nil {
 		http.Error(writer, fmt.Sprintf("Error checking account: %v", err), http.StatusInternalServerError)
 		return
@@ -84,12 +84,12 @@ func (ac *AccountController) CreateAccountHandler(writer http.ResponseWriter, r 
 
 	newAccount := model.NewAccount(input.AccountID, initialBalance)
 
-	if err := ac.Service.CreateAccount(*newAccount); err != nil {
+	if err := accountController.Service.CreateAccount(*newAccount); err != nil {
 		http.Error(writer, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	ac.AuditLogger.LogAction("CreateAccount", fmt.Sprintf("Account created with ID: %d", input.AccountID))
+	accountController.AuditLogger.LogAction("CreateAccount", fmt.Sprintf("Account created with ID: %d", input.AccountID))
 
 	writer.WriteHeader(http.StatusCreated)
 	writer.Write([]byte("Account created successfully"))
